@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Driver</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ driver.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ driver.name }}</td>
+            </tr>
+            <tr>
+                <th>Sponsor</th>
+                <td>{{ driver.sponsor }}</td>
+            </tr>
+            <tr>
+                <th>Bio</th>
+                <td>{{ driver.bio }}</td>
+            </tr>
+            <tr>
+                <th>Carnumber</th>
+                <td>{{ driver.carNumber }}</td>
+            </tr>
+            <tr>
+                <th>Lives</th>
+                <td>{{ driver.lives }}</td>
+            </tr>
+            <tr>
+                <th>Carphoto</th>
+                <td>{{ driver.carPhoto }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ driver.url }}</td>
+            </tr>
+            <tr>
+                <th>Majorsponsor</th>
+                <td>{{ driver.majorSponsor }}</td>
+            </tr>
+            <tr>
+                <th>Driverphoto</th>
+                <td>{{ driver.driverPhoto }}</td>
+            </tr>
+            <tr>
+                <th>Team</th>
+                <td>{{ driver.team }}</td>
+            </tr>
+            <tr>
+                <th>Hideinlist</th>
+                <td>{% if driver.hideInList %}Yes{% else %}No{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('driver_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('driver_edit', { 'id': driver.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

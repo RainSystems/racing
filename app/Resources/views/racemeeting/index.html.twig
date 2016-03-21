@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>RaceMeeting list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Url</th>
+                <th>Round</th>
+                <th>Year</th>
+                <th>Races</th>
+                <th>Datestart</th>
+                <th>Dateend</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for raceMeeting in raceMeetings %}
+            <tr>
+                <td><a href="{{ path('event_show', { 'id': raceMeeting.id }) }}">{{ raceMeeting.id }}</a></td>
+                <td>{{ raceMeeting.name }}</td>
+                <td>{{ raceMeeting.url }}</td>
+                <td>{{ raceMeeting.round }}</td>
+                <td>{{ raceMeeting.year }}</td>
+                <td>{{ raceMeeting.races }}</td>
+                <td>{% if raceMeeting.dateStart %}{{ raceMeeting.dateStart|date('Y-m-d') }}{% endif %}</td>
+                <td>{% if raceMeeting.dateEnd %}{{ raceMeeting.dateEnd|date('Y-m-d') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('event_show', { 'id': raceMeeting.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('event_edit', { 'id': raceMeeting.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('event_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

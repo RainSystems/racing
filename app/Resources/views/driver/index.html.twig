@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Driver list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Sponsor</th>
+                <th>Bio</th>
+                <th>Carnumber</th>
+                <th>Lives</th>
+                <th>Carphoto</th>
+                <th>Url</th>
+                <th>Majorsponsor</th>
+                <th>Driverphoto</th>
+                <th>Team</th>
+                <th>Hideinlist</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for driver in drivers %}
+            <tr>
+                <td><a href="{{ path('driver_show', { 'id': driver.id }) }}">{{ driver.id }}</a></td>
+                <td>{{ driver.name }}</td>
+                <td>{{ driver.sponsor }}</td>
+                <td>{{ driver.bio }}</td>
+                <td>{{ driver.carNumber }}</td>
+                <td>{{ driver.lives }}</td>
+                <td>{{ driver.carPhoto }}</td>
+                <td>{{ driver.url }}</td>
+                <td>{{ driver.majorSponsor }}</td>
+                <td>{{ driver.driverPhoto }}</td>
+                <td>{{ driver.team }}</td>
+                <td>{% if driver.hideInList %}Yes{% else %}No{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('driver_show', { 'id': driver.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('driver_edit', { 'id': driver.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('driver_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

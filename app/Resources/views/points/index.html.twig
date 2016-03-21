@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Points list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Year</th>
+                <th>Tworace</th>
+                <th>Threerace</th>
+                <th>Fourrace</th>
+                <th>Specificpoints</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for point in points %}
+            <tr>
+                <td><a href="{{ path('points_show', { 'id': point.id }) }}">{{ point.id }}</a></td>
+                <td>{{ point.title }}</td>
+                <td>{{ point.year }}</td>
+                <td>{{ point.twoRace }}</td>
+                <td>{{ point.threeRace }}</td>
+                <td>{{ point.fourRace }}</td>
+                <td>{{ point.specificPoints }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('points_show', { 'id': point.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('points_edit', { 'id': point.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('points_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

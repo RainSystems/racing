@@ -1,0 +1,57 @@
+main:
+  #image: rainsystems/symfony:latest
+  build: .
+  container_name: "${COMPOSE_PROJECT_NAME}_main_${DOCKER_HTTP_PORT}"
+  volumes:
+    - ./src:/var/www/src
+    - ./app:/var/www/app
+    - ./data/logs:/var/www/var/logs
+  volumes_from:
+    - data_shared
+  ports:
+    - "${DOCKER_HTTP_PORT}:80"
+  restart: unless-stopped
+  links:
+    - db
+    - memcached
+#    - elasticsearch
+  environment:
+    - APP_ENV:$APP_ENV
+data_shared:
+  image: php:5.6-apache
+  volumes:
+    - /var/www/vendor
+    - /var/www/bower_components
+    - /var/www/node_modules
+  command: /bin/true
+db:
+  image: postgres:9.4
+  volumes:
+    - ./data/backup.sql:/tmp/backup.sql
+  volumes_from:
+    - data_db
+  expose:
+    - 5432
+  restart: unless-stopped
+  environment:
+  - POSTGRES_PASSWORD=03984743i834i3u4698876
+data_db:
+  image: postgres:9.4
+  volumes:
+    - /var/lib/postgresql/data
+  command: ls /var/lib/postgresql/data
+memcached:
+  image: memcached:1.4
+  expose:
+    - 11211
+  restart: unless-stopped
+#elasticsearch:
+#  image: elasticsearch:1.7
+#  volumes_from:
+#  - data_elasticsearch
+#  command: elasticsearch -Des.network.host=_non_loopback:ipv4_
+#data_elasticsearch:
+#  image: elasticsearch:1.7
+#  volumes:
+#    - /usr/share/elasticsearch/data
+#  command: ls /usr/share/elasticsearch/data

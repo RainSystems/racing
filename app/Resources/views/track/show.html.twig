@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Track</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ track.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ track.name }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ track.url }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ track.image }}</td>
+            </tr>
+            <tr>
+                <th>Length</th>
+                <td>{{ track.length }}</td>
+            </tr>
+            <tr>
+                <th>Direction</th>
+                <td>{{ track.direction }}</td>
+            </tr>
+            <tr>
+                <th>Maxspeed</th>
+                <td>{{ track.maxSpeed }}</td>
+            </tr>
+            <tr>
+                <th>Minspeed</th>
+                <td>{{ track.minSpeed }}</td>
+            </tr>
+            <tr>
+                <th>Laprecord</th>
+                <td>{{ track.lapRecord }}</td>
+            </tr>
+            <tr>
+                <th>Mapurl</th>
+                <td>{{ track.mapUrl }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ track.city }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('track_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('track_edit', { 'id': track.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
